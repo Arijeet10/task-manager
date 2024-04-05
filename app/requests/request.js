@@ -1,6 +1,6 @@
 //API Requests
 
-const url = process.env.NEXT_PUBLIC_ROOT_URL || "http://localhost:3000/api/";
+const url = process.env.NEXT_PUBLIC_ROOT_URL || "http://localhost:3000/api";
 
 //POST API Request
 export const addNewTask = async (req) => {
