@@ -14,9 +14,8 @@ export const getAPITask=createAsyncThunk("getAPITask",async()=>{
   const url = process.env.NEXT_PUBLIC_ROOT_URL || "http://localhost:3000/api";
   try {
     const res=await fetch(url)
-    const data=res.ok ? await res.json() : Promise.reject(res);
-    return data;
-    
+    const tasks=res.ok ? await res.json() : Promise.reject(res);
+    return tasks;
   } catch (error) {
     console.log("failed to perform FETCH API",error)
   }
