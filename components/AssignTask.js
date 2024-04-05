@@ -1,10 +1,17 @@
 "use client";
 
 import { updateTask } from "@/app/requests/request";
+import { getAPITask } from "@/redux/slices/taskSlice";
 import { useState } from "react";
 import { IoIosClose } from "react-icons/io";
+import { useDispatch } from "react-redux";
+
 
 const AssignTask = ({ apiTaskData, taskID, closeAssignTask }) => {
+
+  const dispatch = useDispatch();
+
+
   const [priority, setPriority] = useState("Low");
   const [category, setCategory] = useState("Pending");
 
@@ -20,6 +27,7 @@ const AssignTask = ({ apiTaskData, taskID, closeAssignTask }) => {
     alert("Task Updated");
     setPriority("");
     setCategory("");
+    dispatch(getAPITask());
   };
 
   return (

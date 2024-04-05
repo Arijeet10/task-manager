@@ -1,10 +1,16 @@
 "use client";
 
 import { updateTask } from "@/app/requests/request";
+import { getAPITask } from "@/redux/slices/taskSlice";
 import { useState } from "react";
 import { IoIosClose } from "react-icons/io";
+import { useDispatch } from "react-redux";
+
 
 const EditTask = ({ apiTaskData, taskID, closeEditTask }) => {
+
+  const dispatch=useDispatch()
+
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [priority, setPriority] = useState("Low");
@@ -30,6 +36,7 @@ const EditTask = ({ apiTaskData, taskID, closeEditTask }) => {
     setDesc("");
     setPriority("");
     setCategory("");
+    dispatch(getAPITask());
   };
 
   return (

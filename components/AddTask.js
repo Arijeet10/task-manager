@@ -5,6 +5,7 @@ import { addNewTask } from "@/app/requests/request";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { IoIosClose } from "react-icons/io";
+import { getAPITask } from "@/redux/slices/taskSlice";
 
 const AddTask = ({ closeAddTask }) => {
   const [title, setTitle] = useState("");
@@ -20,6 +21,7 @@ const AddTask = ({ closeAddTask }) => {
     alert("Task submitted");
     setTitle("");
     setDesc("");
+    dispatch(getAPITask());
   };
 
   return (
