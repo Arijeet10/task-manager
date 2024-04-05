@@ -7,12 +7,17 @@ const initialState={
     isError:false,
 };
 
-const url = process.env.NEXT_PUBLIC_ROOT_URL || "http://localhost:3000/api/";
+const url = process.env.NEXT_PUBLIC_ROOT_URL || "http://localhost:3000/api";
 
 //GET API request
 export const getAPITask=createAsyncThunk("getAPITask",async()=>{
   try {
-    const res=await fetch(url)
+    const res=await fetch(url,{
+      headers:{
+        accept:"application/json"
+      },
+      cache:"no-store"
+    })
     .then(res=>res.json())
     .catch(error=>console.log("Error in GET API request",error));
     if(res.ok){
