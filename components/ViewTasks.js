@@ -26,7 +26,7 @@ const ViewTasks = () => {
 
   // }
   const apiTaskData=data.tasks;
-  console.log(apiTaskData);
+  //console.log(apiTaskData);
 
   //open task view panel
   const handleTaskView = (task) => {
