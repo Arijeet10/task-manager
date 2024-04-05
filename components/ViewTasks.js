@@ -22,6 +22,9 @@ const ViewTasks = () => {
   const [task, setTask] = useState({});
 
   const data = useSelector((data) => data.apiTaskData);
+  // if(data!==undefined){
+
+  // }
   const apiTaskData=data.tasks;
   console.log(apiTaskData);
 
@@ -99,6 +102,8 @@ const ViewTasks = () => {
     setTaskID("");
     setEditPopUp(false);
   };
+
+
 
   useEffect(() => {
     dispatch(getAPITask());
