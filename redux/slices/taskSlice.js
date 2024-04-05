@@ -7,12 +7,12 @@ const initialState={
     isError:false,
 };
 
-
+const url = process.env.NEXT_PUBLIC_ROOT_URL || "http://localhost:3000/api/";
 
 //GET API request
 export const getAPITask=createAsyncThunk("getAPITask",async()=>{
   try {
-    const res=await fetch("http://localhost:3000/api/",{
+    const res=await fetch(url,{
       cache:"no-store",
     })
     .then(res=>res.json())
