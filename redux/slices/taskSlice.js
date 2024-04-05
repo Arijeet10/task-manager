@@ -2,8 +2,9 @@ import { createAsyncThunk, createSlice,nanoid } from "@reduxjs/toolkit";
 
 //declaring initial state for redux slice
 const initialState={
+    isloading:false,
     apiTaskData:[],
-    tasks:[]
+    isError:false,
 };
 
 
@@ -29,30 +30,18 @@ export const getAPITask=createAsyncThunk("getAPITask",async()=>{
 export const TaskSlice = createSlice({
   name: "addTaskSlice",
   initialState,
-  reducers: {
-    saveTask: (state, action) => {
-        //console.log(action.payload.title);
-      const data = {
-        id:nanoid(),
-        title: action.payload.title,
-        description:action.payload.desc
-      };
-      //console.log(data);
-      state.tasks.push(data);
-    },
-    removeTask:(state,action)=>{
-        const data=state.tasks.filter(item=>{
-            return (action.payload!==item.id)
-        })
-        //console.log(data);
-        state.tasks=data;
-    }
-  },
   extraReducers:(builder)=>{
+    builder.addCase(getAPITask.pending,(state,action)=>{
+      state.isloading=true;
+    }),
     builder.addCase(getAPITask.fulfilled,(state,action)=>{
       //console.log(action)
       state.isloading=false,
       state.apiTaskData=action.payload
+    }),
+    builder.addCase(getAPITask.rejected,(state,action)=>{
+      console.log("Error",action.payload);
+      state.isError(true);
     })
   }
 });

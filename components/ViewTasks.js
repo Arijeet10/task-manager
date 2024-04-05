@@ -8,6 +8,7 @@ import { deleteTask } from "@/app/requests/request";
 import { FaEllipsisV } from "react-icons/fa";
 import AssignTask from "./AssignTask";
 import TaskView from "./TaskView";
+import { MdOutlineDownloading } from "react-icons/md";
 
 const ViewTasks = () => {
   const dispatch = useDispatch();
@@ -17,24 +18,23 @@ const ViewTasks = () => {
   const [assignPopUp, setAssignPopUp] = useState(false); //for assign task component
   const [editDel, setEditDel] = useState(false); //for edit delete option
   const [delPopUp, setDelPopUp] = useState(false); //for delete confirmation
-  const [taskView,setTaskView]=useState(false); //view task data
-  const [task,setTask]=useState({})
+  const [taskView, setTaskView] = useState(false); //view task data
+  const [task, setTask] = useState({});
 
-  const taskData = useSelector((data) => data.tasks);
   const apiTaskData = useSelector((data) => data.apiTaskData.tasks);
-  //console.log(apiTaskData);
+  console.log(apiTaskData);
 
   //open task view panel
-  const handleTaskView=(task)=>{
+  const handleTaskView = (task) => {
     setTask(task);
     setTaskView(true);
-  }
+  };
 
   //close task view panel
-  const closeTaskView=()=>{
+  const closeTaskView = () => {
     setTask({});
     setTaskView(false);
-  }
+  };
 
   //reset everything when background backdrop is clicked
   const handleBackdrop = () => {
@@ -67,16 +67,16 @@ const ViewTasks = () => {
   };
 
   //close the delete confirmation
-  const closeDelete=()=>{
+  const closeDelete = () => {
     setDelPopUp(false);
-  }
+  };
 
   //open delete task confirmation
-  const handleDelete=(taskID)=>{
+  const handleDelete = (taskID) => {
     setTaskID(taskID);
     setEditDel(false);
     setDelPopUp(true);
-  }
+  };
 
   //delete the task
   const confirmDelete = async (_id) => {
@@ -106,9 +106,15 @@ const ViewTasks = () => {
   return (
     <>
       <div className="">
-        <div className="text-5xl p-4 text-center font-bold font-['cursive']">Saved Tasks</div>
+        <div className="text-5xl p-4 text-center font-bold font-['cursive']">
+          Saved Tasks
+        </div>
         <div className=" grid grid-flow-row sm:grid-flow-row sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center gap-4 ">
-          {apiTaskData !== undefined &&
+          {apiTaskData == undefined ? (
+            <MdOutlineDownloading 
+              className="w-20 h-20 absolute top-2/4 left-2/4 translate-x-[-50%] translate-y-[-50%]"
+            />
+          ) : (
             apiTaskData.map((item, i) => {
               return (
                 <div
@@ -149,21 +155,25 @@ const ViewTasks = () => {
                   </div>
                   <div className="p-2 rounded-lg bg-slate-50">
                     <div className="text-2xl font-bold py-2">{item.title}</div>
-                    <div className=" overflow-scroll hide-scrollbar max-h-28">{item.description}</div>
+                    <div className=" overflow-scroll hide-scrollbar max-h-28">
+                      {item.description}
+                    </div>
                   </div>
                   <div className="flex item-center justify-center gap-2">
-                  <button
-                    className="hover:bg-blue-500 bg-black text-white rounded-md w-full p-1"
-                    onClick={() => handleAssignTask(item._id)}
-                  >
-                    Assign
-                  </button>
-                  <button
-                    className="hover:bg-green-500 bg-black text-white rounded-md w-full p-1"
-                    onClick={() =>{handleTaskView(item)}}
-                  >
-                    View
-                  </button>
+                    <button
+                      className="hover:bg-blue-500 bg-black text-white rounded-md w-full p-1"
+                      onClick={() => handleAssignTask(item._id)}
+                    >
+                      Assign
+                    </button>
+                    <button
+                      className="hover:bg-green-500 bg-black text-white rounded-md w-full p-1"
+                      onClick={() => {
+                        handleTaskView(item);
+                      }}
+                    >
+                      View
+                    </button>
                   </div>
                   {editDel && taskID == item._id && (
                     <div className="z-50 shadow-2xl absolute top-10 right-1 flex flex-col font-bold">
@@ -174,7 +184,7 @@ const ViewTasks = () => {
                         Edit
                       </button>
                       <button
-                        onClick={() =>handleDelete(taskID)}
+                        onClick={() => handleDelete(taskID)}
                         className="bg-red-200 hover:bg-red-500 hover:text-white rounded-b-sm p-2"
                       >
                         Delete
@@ -183,16 +193,15 @@ const ViewTasks = () => {
                   )}
                 </div>
               );
-            })}
+            })
+          )}
         </div>
       </div>
       {(editPopUp || assignPopUp || editDel || delPopUp || taskView) && (
         <div className="modal-backdrop" onClick={() => handleBackdrop()} />
       )}
 
-      {taskView && (
-        <TaskView task={task} closeTaskView={closeTaskView} />
-      )}
+      {taskView && <TaskView task={task} closeTaskView={closeTaskView} />}
 
       {editPopUp && (
         <EditTask
@@ -214,13 +223,23 @@ const ViewTasks = () => {
             Delete Task
           </div>
           <div className="bg-white rounded-b-lg p-4">
-          <div className="text-l font-normal my-4">
-            Are you sure, you want to delete the task?
-          </div>
-          <div className="flex items-center justify-center gap-4">
-            <button onClick={()=>confirmDelete(taskID)} className="bg-black hover:bg-red-500 text-white rounded-md p-2 w-full">Yes</button>
-            <button onClick={()=>closeDelete()} className="bg-black hover:bg-blue-500 text-white rounded-md p-2 w-full">No</button>
-          </div>
+            <div className="text-l font-normal my-4">
+              Are you sure, you want to delete the task?
+            </div>
+            <div className="flex items-center justify-center gap-4">
+              <button
+                onClick={() => confirmDelete(taskID)}
+                className="bg-black hover:bg-red-500 text-white rounded-md p-2 w-full"
+              >
+                Yes
+              </button>
+              <button
+                onClick={() => closeDelete()}
+                className="bg-black hover:bg-blue-500 text-white rounded-md p-2 w-full"
+              >
+                No
+              </button>
+            </div>
           </div>
         </div>
       )}
