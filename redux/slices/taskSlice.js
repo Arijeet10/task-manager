@@ -7,15 +7,19 @@ const initialState={
     isError:false,
 };
 
-// const url = process.env.NEXT_PUBLIC_ROOT_URL || "http://localhost:3000/api";
+const url = process.env.NEXT_PUBLIC_ROOT_URL || "http://localhost:3000/api";
 
 //GET API request
 export const getAPITask=createAsyncThunk("getAPITask",async()=>{
-  const url = process.env.NEXT_PUBLIC_ROOT_URL || "http://localhost:3000/api";
   try {
-    const res=await fetch(url)
-    const tasks=res.ok ? await res.json() : Promise.reject(res);
-    return tasks;
+    const res=await fetch(url,{
+      headers:{
+        accept:"application/json"
+      },
+      cache:"no-store"
+    })
+    const data=res.ok ? await res.json() : Promise.reject(res);
+    return data;
   } catch (error) {
     console.log("failed to perform FETCH API",error)
   }
