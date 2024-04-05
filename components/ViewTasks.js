@@ -110,7 +110,7 @@ const ViewTasks = () => {
           Saved Tasks
         </div>
         <div className=" grid grid-flow-row sm:grid-flow-row sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center gap-4 ">
-          {apiTaskData == undefined ? (
+          {!apiTaskData ? (
             <MdOutlineDownloading 
               className="w-20 h-20 absolute top-2/4 left-2/4 translate-x-[-50%] translate-y-[-50%]"
             />
