@@ -21,7 +21,8 @@ const ViewTasks = () => {
   const [taskView, setTaskView] = useState(false); //view task data
   const [task, setTask] = useState({});
 
-  const apiTaskData = useSelector((data) => data.apiTaskData.tasks);
+  const data = useSelector((data) => data.apiTaskData);
+  const apiTaskData=data.tasks;
   console.log(apiTaskData);
 
   //open task view panel
