@@ -50,7 +50,7 @@ export const TaskSlice = createSlice({
   },
   extraReducers:(builder)=>{
     builder.addCase(getAPITask.fulfilled,(state,action)=>{
-      console.log(action)
+      //console.log(action)
       state.isloading=false,
       state.apiTaskData=action.payload
     })
