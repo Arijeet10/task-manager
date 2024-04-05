@@ -18,12 +18,9 @@ export const getAPITask=createAsyncThunk("getAPITask",async()=>{
       },
       cache:"no-store"
     })
-    .then(res=>res.json())
-    .catch(error=>console.log("Error in GET API request",error));
-    if(res.ok){
-      console.log("GET API request succesful.",res);
-    } 
-    return res;
+    const data=res.ok ? await res.json() : Promise.reject(res);
+    return data;
+    
   } catch (error) {
     console.log("failed to perform FETCH API",error)
   }
