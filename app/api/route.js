@@ -47,10 +47,10 @@ export async function GET(){
     try {
         await ConnectMongoDB();
         const tasks=await Tassk.find();//get all task data
-        return new NextResponse.json({tasks});
+        return NextResponse.json({tasks});
 
     } catch (error) {
-        return new NextResponse(JSON.stringify({message:"Error in getting task data:",error}),{status:500});
+        return NextResponse(JSON.stringify({message:"Error in getting task data:",error}),{status:500});
     }
 }
 
