@@ -205,7 +205,7 @@ const ViewTasks = () => {
         </div>
       </div>
       {(editPopUp || assignPopUp || editDel || delPopUp || taskView) && (
-        <div className="modal-backdrop" onClick={() => handleBackdrop()} />
+        <div className={` modal-backdrop`} onClick={() => handleBackdrop()} />
       )}
 
       {taskView && <TaskView task={task} closeTaskView={closeTaskView} />}
