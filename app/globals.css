@@ -13,6 +13,14 @@
     background-color:rgba(0,0,0,0.8);
 }
 
+/* remove default scrollbar style */
 .hide-scrollbar::-webkit-scrollbar{
     display: none;
+}
+
+/* make placeholder text italic */
+.italic-placeholder::placeholder{
+    font-style:italic;
+    color:rgb(151, 158, 163);
+    font-weight: 400;
 }

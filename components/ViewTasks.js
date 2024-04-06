@@ -86,6 +86,7 @@ const ViewTasks = () => {
   const confirmDelete = async (_id) => {
     setEditDel(false);
     await deleteTask({ _id });
+    closeDelete();
     alert("Task Deleted");
     dispatch(getAPITask());
   };

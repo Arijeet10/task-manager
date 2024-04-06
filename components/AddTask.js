@@ -27,8 +27,8 @@ const AddTask = ({ closeAddTask }) => {
   return (
     <>
       <div className=" top-2/4 left-2/4 translate-x-[-50%] translate-y-[-50%] absolute shadow-2xl font-bold w-screen sm:w-[400px]">
-        <div className=" rounded-t-lg bg-blue-400  flex items-center justify-between p-4 ">
-          <div className="">Create a Task</div>
+        <div className=" rounded-t-lg bg-blue-500  flex items-center justify-between p-4 ">
+          <div className="text-3xl font-[cursive] text-white">Create a Task</div>
           <IoIosClose
             onClick={closeAddTask}
             className=" hover:bg-red-500 w-8 h-8 rounded-full"
@@ -39,23 +39,25 @@ const AddTask = ({ closeAddTask }) => {
           className="bg-white rounded-b-lg flex flex-col justify-center gap-4 p-4"
         >
           <div className="flex flex-col ">
-            <label htmlFor="title">Title:</label>
+            {/* <label htmlFor="title">Title:</label> */}
             <input
+              placeholder="Title..."
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               id="title"
               type="text"
-              className="border border-black font-normal"
+              className="border-b focus:outline-none border-black italic-placeholder"
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="desc">Description:</label>
+            {/* <label htmlFor="desc">Description:</label> */}
             <textarea
+              placeholder="Description..."
               value={desc}
               onChange={(e) => setDesc(e.target.value)}
               id="desc"
               type="text"
-              className="border border-black font-normal"
+              className="p-1 focus:outline-none border border-black rounded-lg font-normal italic-placeholder"
               rows="8"
             />
           </div>

@@ -43,7 +43,7 @@ const EditTask = ({ apiTaskData, taskID, closeEditTask }) => {
     <>
       <div className="top-2/4 left-2/4 translate-x-[-50%] translate-y-[-50%] absolute shadow-2xl font-bold w-screen sm:w-[400px] ">
         <div className=" rounded-t-lg bg-blue-500  flex items-center justify-between p-4 ">
-          <div className="">Edit Task</div>
+          <div className="text-3xl font-[cursive] text-white">Edit Task</div>
           <IoIosClose
             onClick={closeEditTask}
             className=" hover:bg-red-500 w-8 h-8 rounded-full"
@@ -54,21 +54,21 @@ const EditTask = ({ apiTaskData, taskID, closeEditTask }) => {
           className="bg-white flex flex-col p-4"
         >
           <div className="flex flex-col py-2">
-            <span>Title:</span>
+            {/* <span>Title:</span> */}
             <input
-              defaultValue={updationTask.title}
+              placeholder={updationTask.title}
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="border border-black font-normal"
+              className="border-b focus:outline-none border-black font-bold italic-placeholder"
             />
           </div>
           <div className="flex flex-col py-2">
-            <span>Description:</span>
+            {/* <span>Description:</span> */}
             <textarea
-              defaultValue={updationTask.description}
+              placeholder={updationTask.description}
               value={desc}
               onChange={(e) => setDesc(e.target.value)}
-              className="border-black border font-normal"
+              className="p-1 focus:outline-none border-black border rounded-lg overflow-scroll hide-scrollbar font-normal italic-placeholder"
               rows="8"
             />
           </div>

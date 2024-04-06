@@ -34,7 +34,7 @@ const AssignTask = ({ apiTaskData, taskID, closeAssignTask }) => {
     <>
       <div className="top-2/4 left-2/4 translate-x-[-50%] translate-y-[-50%] absolute shadow-2xl font-bold w-screen sm:w-[400px]">
         <div className=" rounded-t-lg bg-blue-500  flex items-center justify-between p-4 ">
-          <div className="">Edit Task</div>
+          <div className="text-3xl font-[cursive] text-white">Edit Task</div>
           <IoIosClose
             onClick={closeAssignTask}
             className=" hover:bg-red-500 w-8 h-8 rounded-full"
@@ -45,19 +45,19 @@ const AssignTask = ({ apiTaskData, taskID, closeAssignTask }) => {
           className="bg-white flex flex-col p-4"
         >
           <div className="flex flex-col py-2">
-            <span>Title:</span>
+            {/* <span>Title:</span> */}
             <input
-              defaultValue={updationTask.title}
+              value={updationTask.title}
               readOnly
-              className="border border-black font-normal"
+              className="border-b focus:outline-none border-black font-bold"
             />
           </div>
           <div className="flex flex-col py-2">
-            <span>Description:</span>
+            {/* <span>Description:</span> */}
             <textarea
-              defaultValue={updationTask.description}
+              value={updationTask.description}
               readOnly
-              className="border-black border font-normal"
+              className="p-1 focus:outline-none rounded-lg overflow-scroll hide-scrollbar italic border-black border font-normal"
               rows="8"
             />
           </div>
